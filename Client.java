@@ -16,11 +16,11 @@ public class Client {
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
 
-            System.out.println("Server is listening on port " + port);
+            System.out.println("Сервер читает порт номер:   " + port);
 
             while (true) {
                 Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
+                System.out.println("Новый клиент");
 
                 InputStream input = socket.getInputStream();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -33,18 +33,18 @@ public class Client {
 
                 do {
                     text = reader.readLine();
-                    System.out.println("text  " + text);
-                   File file = new File(text);
-                    System.out.println(file);
-
-                    byte[] buffer = new byte[4 * 1024];
-                    ZipInputStream zis = new ZipInputStream(fileInputStream);
+                    System.out.println(text);
+//                    File destDir = new File("C:\\Users\\Федор\\IdeaProjects\\SearchFiles\\files.zip");
+                    UnZipConverter unZipConverter = new UnZipConverter();
+                    unZipConverter.unzip("C:\\Users\\Федор\\IdeaProjects\\SearchFiles\\files.zip", "C:\\TEST");
+                    byte[] buffer = new byte[1024];
+                    ZipInputStream zis = new ZipInputStream(new FileInputStream(text));
                     ZipEntry zipEntry = zis.getNextEntry();
 //                    String reverseText = new StringBuilder(text).reverse().toString();
 //                    writer.println("Server: " + reverseText);
                     zis.closeEntry();
                     zis.close();
-                } while (!text.equals("bye"));
+                } while (!text.equals("пока"));
 
                 socket.close();
             }
