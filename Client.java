@@ -34,16 +34,10 @@ public class Client {
                 do {
                     text = reader.readLine();
                     System.out.println(text);
-//                    File destDir = new File("C:\\Users\\Федор\\IdeaProjects\\SearchFiles\\files.zip");
                     UnZipConverter unZipConverter = new UnZipConverter();
                     unZipConverter.unzip("C:\\Users\\Федор\\IdeaProjects\\SearchFiles\\files.zip", "C:\\TEST");
                     byte[] buffer = new byte[1024];
-                    ZipInputStream zis = new ZipInputStream(new FileInputStream(text));
-                    ZipEntry zipEntry = zis.getNextEntry();
-//                    String reverseText = new StringBuilder(text).reverse().toString();
-//                    writer.println("Server: " + reverseText);
-                    zis.closeEntry();
-                    zis.close();
+
                 } while (!text.equals("пока"));
 
                 socket.close();
